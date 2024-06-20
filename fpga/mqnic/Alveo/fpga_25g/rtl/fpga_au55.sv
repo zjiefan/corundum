@@ -15,127 +15,8 @@
  */
 module fpga #
 (
-    // FW and board IDs
-    // parameter FPGA_ID = 32'h4B7D093,
-    // parameter FW_ID = 32'h00000000,
-    // parameter FW_VER = 32'h00_00_01_00,
-    // parameter BOARD_ID = 32'h10ee_9037,
-    // parameter BOARD_VER = 32'h01_00_00_00,
-    // parameter BUILD_DATE = 32'd602976000,
-    // parameter GIT_HASH = 32'hdce357bf,
-    // parameter RELEASE_INFO = 32'h00000000,
-
-    // Board configuration
-    // parameter CMS_ENABLE = 1,
-    // parameter TDMA_BER_ENABLE = 0,
-
-    // Structural configuration
-    // parameter IF_COUNT = 1,
-    // parameter PORTS_PER_IF = 1,
-    // parameter SCHED_PER_IF = PORTS_PER_IF,
-    // parameter PORT_MASK = 0,
-
-    // Clock configuration
-    // parameter CLK_PERIOD_NS_NUM = 4,
-    // parameter CLK_PERIOD_NS_DENOM = 1,
-
-    // Queue manager configuration
-    // parameter EVENT_QUEUE_OP_TABLE_SIZE = 32,
-    // parameter TX_QUEUE_OP_TABLE_SIZE = 32,
-    // parameter RX_QUEUE_OP_TABLE_SIZE = 32,
-    // parameter CQ_OP_TABLE_SIZE = 32,
-    parameter EQN_WIDTH = 5,
-    // parameter TX_QUEUE_INDEX_WIDTH = 13,
-    // parameter RX_QUEUE_INDEX_WIDTH = 8,
-    // parameter CQN_WIDTH = (TX_QUEUE_INDEX_WIDTH > RX_QUEUE_INDEX_WIDTH ? TX_QUEUE_INDEX_WIDTH : RX_QUEUE_INDEX_WIDTH) + 1,
-    // parameter EQ_PIPELINE = 3,
-    // parameter TX_QUEUE_PIPELINE = 3+(TX_QUEUE_INDEX_WIDTH > 12 ? TX_QUEUE_INDEX_WIDTH-12 : 0),
-    // parameter RX_QUEUE_PIPELINE = 3+(RX_QUEUE_INDEX_WIDTH > 12 ? RX_QUEUE_INDEX_WIDTH-12 : 0),
-    // parameter CQ_PIPELINE = 3+(CQN_WIDTH > 12 ? CQN_WIDTH-12 : 0),
-
-    // TX and RX engine configuration
-    // parameter TX_DESC_TABLE_SIZE = 32,
-    // parameter RX_DESC_TABLE_SIZE = 32,
-    // parameter RX_INDIR_TBL_ADDR_WIDTH = RX_QUEUE_INDEX_WIDTH > 8 ? 8 : RX_QUEUE_INDEX_WIDTH,
-
-    // Scheduler configuration
-    // parameter TX_SCHEDULER_OP_TABLE_SIZE = TX_DESC_TABLE_SIZE,
-    // parameter TX_SCHEDULER_PIPELINE = TX_QUEUE_PIPELINE,
-    // parameter TDMA_INDEX_WIDTH = 6,
-
-    // Interface configuration
-    parameter PTP_TS_ENABLE = 1,
-    parameter TX_CPL_FIFO_DEPTH = 32,
-    parameter TX_CHECKSUM_ENABLE = 1,
-    parameter RX_HASH_ENABLE = 1,
-    parameter RX_CHECKSUM_ENABLE = 1,
-    parameter PFC_ENABLE = 1,
-    parameter LFC_ENABLE = PFC_ENABLE,
-    parameter ENABLE_PADDING = 1,
-    parameter ENABLE_DIC = 1,
-    parameter MIN_FRAME_LENGTH = 64,
-    parameter TX_FIFO_DEPTH = 32768,
-    parameter RX_FIFO_DEPTH = 32768,
-    parameter MAX_TX_SIZE = 9214,
-    parameter MAX_RX_SIZE = 9214,
-    parameter TX_RAM_SIZE = 32768,
-    parameter RX_RAM_SIZE = 32768,
-
-    // RAM configuration
-    parameter HBM_CH = 32,
-    parameter HBM_ENABLE = 0,
-    parameter HBM_GROUP_SIZE = HBM_CH,
-    parameter AXI_HBM_ADDR_WIDTH = 34,
-    parameter AXI_HBM_MAX_BURST_LEN = 16,
-
-    // Application block configuration
-    parameter APP_ID = 32'h00000000,
-    parameter APP_ENABLE = 0,
-    parameter APP_CTRL_ENABLE = 1,
-    parameter APP_DMA_ENABLE = 1,
-    parameter APP_AXIS_DIRECT_ENABLE = 1,
-    parameter APP_AXIS_SYNC_ENABLE = 1,
-    parameter APP_AXIS_IF_ENABLE = 1,
-    parameter APP_STAT_ENABLE = 1,
-
-    // DMA interface configuration
-    // parameter DMA_IMM_ENABLE = 0,
-    // parameter DMA_IMM_WIDTH = 32,
-    // parameter DMA_LEN_WIDTH = 16,
-    // parameter DMA_TAG_WIDTH = 16,
-    // parameter RAM_ADDR_WIDTH = $clog2(TX_RAM_SIZE > RX_RAM_SIZE ? TX_RAM_SIZE : RX_RAM_SIZE),
-    // parameter RAM_PIPELINE = 2,
-
     // PCIe interface configuration
-    parameter AXIS_PCIE_DATA_WIDTH = 512,
-    // parameter PF_COUNT = 1,
-    // parameter VF_COUNT = 0,
-
-    // Interrupt configuration
-    // parameter IRQ_INDEX_WIDTH = EQN_WIDTH,
-
-    // AXI lite interface configuration (control)
-    // parameter AXIL_CTRL_DATA_WIDTH = 32,
-    // parameter AXIL_CTRL_ADDR_WIDTH = 24,
-
-    // AXI lite interface configuration (application control)
-    // parameter AXIL_APP_CTRL_DATA_WIDTH = AXIL_CTRL_DATA_WIDTH,
-    // parameter AXIL_APP_CTRL_ADDR_WIDTH = 24,
-
-    // Ethernet interface configuration
-    // parameter AXIS_ETH_SYNC_DATA_WIDTH_DOUBLE = 1,
-    // parameter AXIS_ETH_TX_PIPELINE = 4,
-    // parameter AXIS_ETH_TX_FIFO_PIPELINE = 4,
-    // parameter AXIS_ETH_TX_TS_PIPELINE = 4,
-    // parameter AXIS_ETH_RX_PIPELINE = 4,
-    // parameter AXIS_ETH_RX_FIFO_PIPELINE = 4,
-
-    // Statistics counter subsystem
-    // parameter STAT_ENABLE = 1,
-    // parameter STAT_DMA_ENABLE = 1,
-    // parameter STAT_PCIE_ENABLE = 1,
-    // parameter STAT_INC_WIDTH = 24,
-    parameter STAT_ID_WIDTH = 12
+    parameter AXIS_PCIE_DATA_WIDTH = 512
 )
 (
     /*
@@ -202,21 +83,8 @@ parameter AXIS_PCIE_RC_USER_WIDTH = AXIS_PCIE_DATA_WIDTH < 512 ? 75 : 161;
 parameter AXIS_PCIE_RQ_USER_WIDTH = AXIS_PCIE_DATA_WIDTH < 512 ? 62 : 137;
 parameter AXIS_PCIE_CQ_USER_WIDTH = AXIS_PCIE_DATA_WIDTH < 512 ? 85 : 183;
 parameter AXIS_PCIE_CC_USER_WIDTH = AXIS_PCIE_DATA_WIDTH < 512 ? 33 : 81;
-// parameter RC_STRADDLE = AXIS_PCIE_DATA_WIDTH >= 256;
-// parameter RQ_STRADDLE = AXIS_PCIE_DATA_WIDTH >= 512;
-// parameter CQ_STRADDLE = AXIS_PCIE_DATA_WIDTH >= 512;
-// parameter CC_STRADDLE = AXIS_PCIE_DATA_WIDTH >= 512;
 parameter RQ_SEQ_NUM_WIDTH = 6;
-// parameter PCIE_TAG_COUNT = 256;
 
-// // Ethernet interface configuration
-// parameter XGMII_DATA_WIDTH = 64;
-// parameter XGMII_CTRL_WIDTH = XGMII_DATA_WIDTH/8;
-// parameter AXIS_ETH_DATA_WIDTH = XGMII_DATA_WIDTH;
-// parameter AXIS_ETH_KEEP_WIDTH = AXIS_ETH_DATA_WIDTH/8;
-// parameter AXIS_ETH_SYNC_DATA_WIDTH = AXIS_ETH_DATA_WIDTH*(AXIS_ETH_SYNC_DATA_WIDTH_DOUBLE ? 2 : 1);
-// parameter AXIS_ETH_TX_USER_WIDTH = TX_TAG_WIDTH + 1;
-// parameter AXIS_ETH_RX_USER_WIDTH = (PTP_TS_ENABLE ? PTP_TS_WIDTH : 0) + 1;
 
 // Clock and reset
 wire pcie_user_clk;
