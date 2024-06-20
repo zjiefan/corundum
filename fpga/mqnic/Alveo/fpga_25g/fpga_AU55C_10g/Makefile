@@ -7,7 +7,7 @@ FPGA_TOP = fpga
 FPGA_ARCH = virtexuplus
 
 # Files for synthesis
-SYN_FILES = rtl/fpga_au55.v
+SYN_FILES = rtl/fpga_au55.sv
 SYN_FILES += rtl/fpga_hbm.v
 SYN_FILES += rtl/fpga_core.v
 SYN_FILES += rtl/sync_signal.v
