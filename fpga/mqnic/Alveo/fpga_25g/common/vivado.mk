@@ -1,11 +1,11 @@
 ###################################################################
-# 
+#
 # Xilinx Vivado FPGA Makefile
-# 
+#
 # Copyright (c) 2016 Alex Forencich
-# 
+#
 ###################################################################
-# 
+#
 # Parameters:
 # FPGA_TOP - Top module name
 # FPGA_FAMILY - FPGA family (e.g. VirtexUltrascale)
@@ -14,9 +14,9 @@
 # INC_FILES - space-separated list of include files
 # XDC_FILES - space-separated list of timing constraint files
 # XCI_FILES - space-separated list of IP XCI files
-# 
+#
 # Example:
-# 
+#
 # FPGA_TOP = fpga
 # FPGA_FAMILY = VirtexUltrascale
 # FPGA_DEVICE = xcvu095-ffva2104-2-e
@@ -24,7 +24,7 @@
 # XDC_FILES = fpga.xdc
 # XCI_FILES = ip/pcspma.xci
 # include ../common/vivado.mk
-# 
+#
 ###################################################################
 
 # phony targets
@@ -112,6 +112,8 @@ $(PROJECT).runs/synth_1/$(PROJECT).dcp: create_project.tcl update_config.tcl $(S
 # implementation run
 $(PROJECT).runs/impl_1/$(PROJECT)_routed.dcp: $(PROJECT).runs/synth_1/$(PROJECT).dcp
 	echo "open_project $(PROJECT).xpr" > run_impl.tcl
+	echo "open_run synth_1" >> run_impl.tcl
+	echo "source debug.tcl" >> run_impl.tcl
 	echo "reset_run impl_1" >> run_impl.tcl
 	echo "launch_runs -jobs 4 impl_1" >> run_impl.tcl
 	echo "wait_on_run impl_1" >> run_impl.tcl

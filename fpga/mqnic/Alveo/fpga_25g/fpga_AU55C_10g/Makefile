@@ -7,7 +7,7 @@ FPGA_TOP = fpga
 FPGA_ARCH = virtexuplus
 
 # Files for synthesis
-SYN_FILES = rtl/fpga_au55.v
+SYN_FILES = rtl/fpga_au55.sv
 SYN_FILES += rtl/fpga_hbm.v
 SYN_FILES += rtl/fpga_core.v
 SYN_FILES += rtl/sync_signal.v
@@ -132,6 +132,12 @@ SYN_FILES += lib/pcie/rtl/pcie_us_if_cc.v
 SYN_FILES += lib/pcie/rtl/pcie_us_if_cq.v
 SYN_FILES += lib/pcie/rtl/pcie_us_cfg.v
 SYN_FILES += lib/pcie/rtl/pulse_merge.v
+SYN_FILES += lib/xt/bitable_pkg.sv
+SYN_FILES += lib/xt/errors_locker.sv
+SYN_FILES += lib/xt/scdpram.sv
+SYN_FILES += lib/xt/arst_resync.sv
+SYN_FILES += lib/xt/low_latency_scfifo.sv
+SYN_FILES += lib/xt/usp_axis256_viewer.sv
 
 # XDC files
 XDC_FILES = fpga_au55.xdc

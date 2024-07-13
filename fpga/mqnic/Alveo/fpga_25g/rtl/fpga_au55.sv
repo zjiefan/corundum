@@ -1890,6 +1890,28 @@ core_inst (
     .m_axil_cms_rready(axil_cms_rready)
 );
 
+
+bitables_pkg::gnet_t gnet;
+bitables_pkg::axis512_t cq_bus;
+always_comb begin
+    gnet = 0;
+    gnet.clk = pcie_user_clk;
+    gnet.arst = pcie_user_reset;
+    cq_bus = 0;
+    cq_bus.tdata = axis_cq_tdata;
+    cq_bus.tvalid = axis_cq_tvalid;
+    cq_bus.tlast = axis_cq_tlast;
+    cq_bus.tkeep = axis_cq_tkeep;
+
+end
+
+usp_axis256_viewer
+u_usp_axis256_viewer (
+    .gnet,
+    .din     (cq_bus)
+
+);
+
 endmodule
 
 `resetall
